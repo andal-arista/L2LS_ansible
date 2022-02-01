@@ -1,0 +1,16 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+  - name: Register variables
+    include_vars: 
+      file: "{{lookup('env','PWD')}}/vars/svi.yml"
+      name: svi 
+  
+  - name: Create templates
+    template: 
+      src: "{{lookup('env','PWD')}}/templates/svi.j2"
+      dest: "{{lookup('env','PWD')}}/configs/{{inventory_hostname}}_interface.cfg"
+    
+
+
